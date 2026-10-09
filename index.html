@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NovaStock | Gestión de Inventario</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- TypeScript compilado -->
+    <script src="dist/index.js" defer></script>
+</head>
+
+<body>
+
+    <!-- BOTÓN DE PRUEBA -->
+    <button id="boton-prueba" type="button">
+        Probar conexión
+    </button>
+
+    <p id="mensaje-prueba">
+        
+    </p>
+
+
+    <!-- FONDO ANIMADO -->
+
+    <div class="background">
+
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+    </div>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                NS
+            </div>
+
+            <div>
+
+                <h2>NovaStock</h2>
+
+                <span>
+                    Inventory System
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Sistema activo
+
+        </div>
+
+    </nav>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="badge">
+                    ✦ PANEL DE CONTROL
+                </span>
+
+                <h1>
+                    Controlá tu
+                    <span>inventario</span>
+                </h1>
+
+                <p>
+                    Gestioná tus productos, controlá el stock
+                    y mantené tu negocio organizado desde un
+                    solo lugar.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ESTADÍSTICAS -->
+
+        <section class="stats">
+
+
+            <!-- TOTAL PRODUCTOS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    📦
+                </div>
+
+                <div>
+
+                    <span>
+                        Total productos
+                    </span>
+
+                    <strong id="cantidadProductos">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- STOCK -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    📊
+                </div>
+
+                <div>
+
+                    <span>
+                        Unidades en stock
+                    </span>
+
+                    <strong id="cantidadStock">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- VALOR -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Valor inventario
+                    </span>
+
+                    <strong id="valorInventario">
+                        $0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GRID PRINCIPAL -->
+
+        <section class="dashboard">
+
+
+            <!-- AGREGAR PRODUCTO -->
+
+            <div class="panel add-panel">
+
+                <div class="panel-title">
+
+                    <div>
+
+                        <span class="small-title">
+                            INVENTARIO
+                        </span>
+
+                        <h2>
+                            Agregar producto
+                        </h2>
+
+                    </div>
+
+
+                    <div class="title-icon">
+                        +
+                    </div>
+
+                </div>
+
+
+                <!-- FORMULARIO -->
+
+                <form id="formProducto">
+
+
+                    <!-- NOMBRE -->
+
+                    <div class="input-group">
+
+                        <label for="nombre">
+                            Nombre
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Ej: Notebook Lenovo"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CATEGORÍA -->
+
+                    <div class="input-group">
+
+                        <label for="categoria">
+                            Categoría
+                        </label>
+
+                        <input
+                            type="text"
+                            id="categoria"
+                            placeholder="Ej: Tecnología"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PRECIO Y STOCK -->
+
+                    <div class="input-row">
+
+
+                        <!-- PRECIO -->
+
+                        <div class="input-group">
+
+                            <label for="precio">
+                                Precio
+                            </label>
+
+                            <input
+                                type="number"
+                                id="precio"
+                                placeholder="$ 0"
+                                min="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- STOCK -->
+
+                        <div class="input-group">
+
+                            <label for="stock">
+                                Stock
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stock"
+                                placeholder="0"
+                                min="0"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTÓN AGREGAR -->
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="AgregarProducto"
+                    >
+
+                        <span>
+                            Agregar producto
+                        </span>
+
+                        <span class="button-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- DIÁLOGO PRODUCTO AGREGADO -->
+
+            <dialog id="Mensaje">
+
+                <div class="dialog-content">
+
+                    <h2>
+                        ✅ Producto agregado
+                    </h2>
+
+                    <p>
+                        El producto fue agregado correctamente
+                        al inventario.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="Cerrar"
+                        class="primary-button"
+                    >
+
+                        <span>
+                            Cerrar
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </dialog>
+
+
+            <!-- BUSCADOR -->
+
+            <div class="panel search-panel">
+
+
+                <div class="panel-title">
+
+                    <div>
+
+                        <span class="small-title">
+                            BUSCADOR
+                        </span>
+
+                        <h2>
+                            Encontrá productos
+                        </h2>
+
+                    </div>
+
+
+                    <div class="title-icon search-icon">
+                        🔎
+                    </div>
+
+                </div>
+                <!-- BUSCAR POR NOMBRE -->
+
+                <!-- BUSCAR POR NOMBRE -->
+                <!-- BUSCAR POR NOMBRE -->
+                <!-- BUSCAR POR NOMBRE -->
+
+                <!-- BUSCAR POR NOMBRE -->
+
+                <div class="search-box">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="buscarNombre"
+                        placeholder="Buscar producto..."
+                    >
+
+                </div>
+
+
+                <!-- FILTROS -->
+
+                <div class="filters">
+
+
+                    <!-- CATEGORÍA -->
+
+                    <div class="input-group">
+
+                        <label for="buscarCategoria">
+                            Categoría
+                        </label>
+
+                        <input
+                            type="text"
+                            id="buscarCategoria"
+                            placeholder="Todas"
+                        >
+
+                    </div>
+
+
+                    <!-- STOCK MÍNIMO -->
+
+                    <div class="input-group">
+
+                        <label for="buscarStock">
+                            Stock mínimo
+                        </label>
+
+                        <input
+                            type="number"
+                            id="buscarStock"
+                            placeholder="0"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <!-- PRECIO MÁXIMO -->
+
+                    <div class="input-group">
+
+                        <label for="buscarPrecio">
+                            Precio máximo
+                        </label>
+
+                        <input
+                            type="number"
+                            id="buscarPrecio"
+                            placeholder="$ 0"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCTOS -->
+
+        <section class="products-section">
+
+
+            <!-- CABECERA -->
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="small-title">
+                        CATÁLOGO
+                    </span>
+
+                    <h2>
+                        Tus productos
+                    </h2>
+
+                </div>
+
+
+                <div class="product-count">
+
+                    <span id="contadorFiltrados">
+                        0 productos
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- LISTA DE PRODUCTOS -->
+
+            <div
+                id="listaProductos"
+                class="products-grid"
+            >
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast"
+    >
+
+        <span id="toastMensaje">
+            Producto agregado
+        </span>
+
+    </div>
+
+
+</body>
+
+</html>
